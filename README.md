@@ -11,7 +11,7 @@ Consume un backend construido en NestJS.
 - TailwindCSS
 - PrimeNG
 - NgRx (Entity, Effects, Store)
-- Signals API
+- Signals
 
 ---
 
