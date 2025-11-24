@@ -6,12 +6,10 @@
     </div>
   </ng-template>
 
-  <!-- TEXTO -->
   <span class="text-white/50 block mb-4">
     Seleccione la clase que desea editar.
   </span>
 
-  <!-- SELECT PARA ELEGIR LA CLASE -->
   <div class="mb-5">
     <label class="font-semibold text-white mb-2 block">Clase</label>
 
@@ -25,16 +23,13 @@
     />
   </div>
 
-  <!-- FORMULARIO (solo si hay un bloque seleccionado) -->
-  @if (currentIndex !== null) {
+  @if (actualIndex !== null) {
   <form [formGroup]="formEdit" class="flex flex-col gap-4">
-    <!-- Día -->
     <div class="flex gap-4 items-center">
       <label class="font-semibold w-24 text-white">Día</label>
       <p-select formControlName="day" [options]="days" class="flex-auto" />
     </div>
 
-    <!-- Materia -->
     <div class="flex gap-4 items-center">
       <label class="font-semibold w-24 text-white">Materia</label>
       <p-select
@@ -46,7 +41,6 @@
       />
     </div>
 
-    <!-- Inicio -->
     <div class="flex gap-4 items-center">
       <label class="font-semibold w-24 text-white">Inicio</label>
       <input
@@ -57,7 +51,6 @@
       />
     </div>
 
-    <!-- Fin -->
     <div class="flex gap-4 items-center">
       <label class="font-semibold w-24 text-white">Fin</label>
       <input
@@ -70,7 +63,6 @@
   </form>
   }
 
-  <!-- FOOTER -->
   <div class="flex justify-end gap-2 pt-4">
     <p-button label="Cancelar" [text]="true" (click)="editVisible = false" />
     <p-button label="Guardar" [outlined]="true" (click)="confirmEditClass()" />

@@ -116,7 +116,6 @@ export class UsersEffects {
     )
   );
 
-  // UPDATE USER
   updateUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UsersActions.update),
@@ -174,7 +173,6 @@ export class UsersEffects {
     )
   );
 
-  // DELETE USER
   deleteUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UsersActions.delete),

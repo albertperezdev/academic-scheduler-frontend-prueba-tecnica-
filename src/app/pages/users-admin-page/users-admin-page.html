@@ -1,5 +1,4 @@
 <div class="p-8">
-  <!-- Encabezado -->
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-semibold text-gray-200">Gestión de Usuarios</h2>
 
@@ -12,7 +11,6 @@
     ></button>
   </div>
 
-  <!-- Tabla -->
   <p-table
     [value]="(usuarios$ | async)!"
     responsiveLayout="scroll"
@@ -45,10 +43,8 @@
           </p-tag>
         </td>
 
-        <!-- ACCIONES -->
         <td class="text-center">
           <div class="flex items-center justify-center gap-2">
-            <!-- Editar -->
             <button
               pButton
               severity="info"
@@ -57,7 +53,6 @@
               (click)="editarUsuario(user)"
             ></button>
 
-            <!-- Eliminar -->
             <button
               pButton
               severity="danger"
@@ -82,15 +77,12 @@
       contentStyleClass="!p-0 !overflow-hidden"
       headerStyleClass="!bg-transparent !text-gray-100 !text-xl !font-semibold"
     >
-      <!-- CONTENIDO COMPLETO -->
       <div
         class="bg-[#0d0d0d]/80 backdrop-blur-xl border border-white/10 pl-8 pt-4 pr-8 rounded-2xl"
       >
-        <!-- SUBTITULO -->
         <p class="text-gray-400 text-sm mb-4">Añade un usuario</p>
 
         <div class="flex flex-col gap-5">
-          <!-- Nombre -->
           <div class="flex flex-col gap-2">
             <label class="text-gray-300 text-sm font-black">Nombre</label>
             <input
@@ -133,7 +125,6 @@
           </div>
         </div>
 
-        <!-- Botones -->
         <div class="flex justify-end gap-3 mt-8 mb-4">
           <button
             pButton
@@ -162,12 +153,10 @@
       contentStyleClass="!p-0 !overflow-hidden"
       headerStyleClass="!bg-transparent !text-gray-100 !text-xl !font-semibold"
     >
-      <!-- CONTENIDO COMPLETO -->
       <div
         class="bg-[#0d0d0d]/80 backdrop-blur-xl border border-white/10 pl-8 pt-4 pr-8 rounded-2xl"
       >
         <div class="flex flex-col gap-5">
-          <!-- Nombre -->
           <div class="flex flex-col gap-2">
             <label class="text-gray-300 text-sm font-black">Nombre</label>
             <input
@@ -179,7 +168,6 @@
             />
           </div>
 
-          <!-- Email -->
           <div class="flex flex-col gap-2">
             <label class="text-gray-300 text-sm font-black">Email</label>
             <input
@@ -211,7 +199,6 @@
           </div>
         </div>
 
-        <!-- Botones -->
         <div class="flex justify-end gap-3 mt-8 mb-4">
           <button
             pButton

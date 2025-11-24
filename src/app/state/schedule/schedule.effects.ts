@@ -16,13 +16,13 @@ function backendToSchedule(rows: any[]) {
   return {
     id: userId,
     userId,
-    blocks: rows.map((r) => ({
-      id: r.id,
-      day: r.dia,
-      name: r.asignatura?.nombre ?? '',
-      startTime: r.hora_inicio,
-      endTime: r.hora_fin,
-      subjectId: r.asignatura_id,
+    blocks: rows.map((row) => ({
+      id: row.id,
+      day: row.dia,
+      name: row.asignatura?.nombre ?? '',
+      startTime: row.hora_inicio,
+      endTime: row.hora_fin,
+      subjectId: row.asignatura_id,
     })),
   };
 }
@@ -64,9 +64,6 @@ export class ScheduleEffects {
     )
   );
 
-  // =====================================================
-  // ADD CLASS
-  // =====================================================
   add$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ScheduleActions.addClass),
@@ -104,9 +101,6 @@ export class ScheduleEffects {
     )
   );
 
-  // =====================================================
-  // EDIT CLASS
-  // =====================================================
   edit$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ScheduleActions.editClass),
@@ -156,9 +150,6 @@ export class ScheduleEffects {
     )
   );
 
-  // =====================================================
-  // DELETE CLASS
-  // =====================================================
   delete$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ScheduleActions.removeClass),

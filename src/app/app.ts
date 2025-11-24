@@ -17,17 +17,9 @@ import { AuthActions } from './state/auth/auth.actions';
 export class App implements OnInit {
   protected readonly title = signal('crud');
   msg = inject(MessageService);
-  private loginService = inject(LoginService);
-  private router = inject(Router);
+
   private store = inject(Store);
 
-  show() {
-    this.msg.add({
-      severity: 'success',
-      summary: 'Funciona',
-      detail: 'Toast global funcionando',
-    });
-  }
   ngOnInit() {
     this.store.dispatch(AuthActions.hydrate());
   }

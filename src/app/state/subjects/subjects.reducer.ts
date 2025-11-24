@@ -31,5 +31,4 @@ export const subjectsReducer = createReducer(
     loading: false,
     error,
   }))
-  // mutations (add/update/delete) are handled via effects which fetch from backend
 );

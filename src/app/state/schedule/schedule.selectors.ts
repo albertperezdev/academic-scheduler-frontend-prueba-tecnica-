@@ -65,7 +65,7 @@ export const selectScheduleWithSubjectsForUser = (userId: number) =>
 
 export const selectSubjectsFromSchedule = (userId: number) =>
   createSelector(
-    selectScheduleByUserId(userId), // schedule REAL
+    selectScheduleByUserId(userId),
     selectAllSubjects,
     (schedule, subjects) => {
       if (!schedule) return [];

@@ -15,7 +15,6 @@
     (ngSubmit)="confirmAdd()"
     class="flex flex-col gap-4"
   >
-    <!-- Nombre -->
     <div class="flex gap-3 items-center">
       <label class="w-28 text-white font-medium">Nombre</label>
       <input
@@ -26,7 +25,6 @@
       />
     </div>
 
-    <!-- Profesor -->
     <div class="flex gap-3 items-center">
       <label class="w-28 text-white font-medium">Profesor</label>
       <p-select
@@ -40,10 +38,6 @@
       </p-select>
     </div>
 
-    <!-- Descripción -->
-    <!-- descripción removed -->
-
-    <!-- Máximo clases por semana -->
     <div class="flex gap-3 items-center">
       <label class="w-28 text-white font-medium">Clases/Sem</label>
       <input
@@ -56,7 +50,6 @@
       />
     </div>
 
-    <!-- FOOTER -->
     <div class="flex justify-end gap-2 pt-4">
       <p-button label="Cancelar" (click)="visible = false" [text]="true" />
       <p-button type="submit" label="Guardar" [outlined]="true" />

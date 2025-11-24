@@ -39,10 +39,9 @@ export class ScheduleDialogAdd {
   confirmAddClass() {
     if (this.addForm.invalid) return;
 
-    // Bloque compatible con ScheduleEffects
     const block = {
       ...this.addForm.value,
-      id: 0, // temporal — backend genera el real
+      id: 0,
       name:
         this.materias().find((m: any) => m.id === this.addForm.value.subjectId)
           ?.name ?? '',

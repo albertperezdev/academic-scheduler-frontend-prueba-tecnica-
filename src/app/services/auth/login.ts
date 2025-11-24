@@ -12,12 +12,10 @@ export class LoginService {
 
   private http = inject(HttpClient);
 
-  // GET all users: /users/create/all
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.API_URL}users/all`);
   }
 
-  // Login: no explicit /login endpoint provided, so fetch users and match credentials
   login(email: string, password: string): Observable<User | null> {
     return this.getUsers().pipe(
       map(
@@ -28,13 +26,11 @@ export class LoginService {
     );
   }
 
-  // Register: POST /users/create
   register(data: {
     name: string;
     email: string;
     password: string;
   }): Observable<User> {
-    // backend expects `nombre` instead of `name`
     const payload: any = {
       nombre: data.name,
       email: data.email,
@@ -43,14 +39,12 @@ export class LoginService {
     return this.http.post<User>(`${this.API_URL}users/create`, payload);
   }
 
-  // Admin: add new user via POST /users/create
   addNewUser(data: {
     name: string;
     email: string;
     password: string;
     role: 'estudiante' | 'profesor' | 'admin';
   }): Observable<User> {
-    // accept either { name } or { nombre } coming from effects/components
     const nombre = (data as any).nombre ?? (data as any).name;
     const payload: any = {
       nombre,
@@ -63,9 +57,7 @@ export class LoginService {
     return this.http.post<User>(`${this.API_URL}users/create`, payload);
   }
 
-  // Update user: PATCH /users/edit/:id
   updateUser(user: User): Observable<User> {
-    // Transform to backend field names
     const payload: any = {
       nombre: user.name,
       email: user.email,
@@ -79,7 +71,6 @@ export class LoginService {
     );
   }
 
-  // Delete user: DELETE /users/delete/:id
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}users/delete/${id}`);
   }

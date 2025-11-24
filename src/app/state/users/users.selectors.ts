@@ -2,20 +2,15 @@ import { createFeature, createSelector } from '@ngrx/store';
 import { usersReducer } from './users.reducer';
 import { usersAdapter } from './users.adapter';
 
-// 1️⃣ Crear el feature igual que en auth
 export const usersFeature = createFeature({
   name: 'users',
   reducer: usersReducer,
 });
 
-// 2️⃣ Extraer el selector raíz del feature (igual que auth)
 const { selectUsersState } = usersFeature;
 
-// 3️⃣ EntitySelectors
 const { selectAll, selectEntities, selectIds, selectTotal } =
   usersAdapter.getSelectors();
-
-// 4️⃣ Selectores creados siguiendo tu arquitectura
 
 export const selectAllUsers = createSelector(selectUsersState, selectAll);
 

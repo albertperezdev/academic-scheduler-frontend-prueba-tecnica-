@@ -16,7 +16,6 @@ export class AuthLayout {
   private store = inject(Store);
 
   ngOnInit(): void {
-    // Al cargar el layout de autenticación, precargar los usuarios desde el backend
     this.store.dispatch(UsersActions.load());
   }
 }

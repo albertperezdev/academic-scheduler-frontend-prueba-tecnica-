@@ -33,11 +33,12 @@ export class SubjectsService {
     console.log('[SubjectsService] fetchAll ->', `${this.API_URL}subjects/all`);
     return this.http.get<any[]>(`${this.API_URL}subjects/all`).pipe(
       map((arr) =>
-        (arr ?? []).map((b) => ({
-          id: b.id,
-          name: b.nombre ?? b.name,
-          profesorId: b.profesor_id ?? b.profesorId ?? b.profesor?.id,
-          maxPerWeek: b.max_clases ?? b.maxPerWeek ?? 1,
+        (arr ?? []).map((subject) => ({
+          id: subject.id,
+          name: subject.nombre ?? subject.name,
+          profesorId:
+            subject.profesor_id ?? subject.profesorId ?? subject.profesor?.id,
+          maxPerWeek: subject.max_clases ?? subject.maxPerWeek ?? 1,
         }))
       ),
       tap((s) => (this.subjects = s ?? []))
@@ -55,15 +56,16 @@ export class SubjectsService {
     console.log('[SubjectsService] POST', url, payload);
 
     return this.http.post<any>(url, payload).pipe(
-      map((b) => ({
-        id: b.id,
-        name: b.nombre ?? b.name,
-        profesorId: b.profesor_id ?? b.profesorId ?? b.profesor?.id,
-        maxPerWeek: b.max_clases ?? b.maxPerWeek ?? 1,
+      map((subject) => ({
+        id: subject.id,
+        name: subject.nombre ?? subject.name,
+        profesorId:
+          subject.profesor_id ?? subject.profesorId ?? subject.profesor?.id,
+        maxPerWeek: subject.max_clases ?? subject.maxPerWeek ?? 1,
       })),
-      tap((s) => {
-        console.log('[SubjectsService] created ->', s);
-        this.subjects.push(s);
+      tap((subject) => {
+        console.log('[SubjectsService] created ->', subject);
+        this.subjects.push(subject);
       })
     );
   }
@@ -86,9 +88,11 @@ export class SubjectsService {
         profesorId: b.profesor_id ?? b.profesorId ?? b.profesor?.id,
         maxPerWeek: b.max_clases ?? b.maxPerWeek ?? 1,
       })),
-      tap((s) => {
-        const i = this.subjects.findIndex((x) => x.id === s.id);
-        if (i !== -1) this.subjects[i] = s;
+      tap((subject) => {
+        const index = this.subjects.findIndex(
+          (subject) => subject.id === subject.id
+        );
+        if (index !== -1) this.subjects[index] = subject;
       })
     );
   }
@@ -102,10 +106,10 @@ export class SubjectsService {
   }
 
   findByProfesorId(profesorId: number): Subject[] {
-    return this.subjects.filter((s) => s.profesorId === profesorId);
+    return this.subjects.filter((subject) => subject.profesorId === profesorId);
   }
 
   findById(id: number): Subject | undefined {
-    return this.subjects.find((s) => s.id === id);
+    return this.subjects.find((subject) => subject.id === id);
   }
 }

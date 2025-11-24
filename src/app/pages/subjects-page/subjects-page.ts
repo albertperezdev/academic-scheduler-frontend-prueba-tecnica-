@@ -38,10 +38,8 @@ export class SubjectsPage {
     this.store.dispatch(SubjectsActions.load());
   }
 
-  // Signals desde NgRx
   subjectsSignal = this.store.selectSignal(selectSubjectsWithProfessorName);
 
-  // Referencias a los diálogos
   @ViewChild(SubjectDialogAdd) addDialog!: SubjectDialogAdd;
   @ViewChild(SubjectDialogEdit) editDialog!: SubjectDialogEdit;
   @ViewChild(SubjectDialogDelete) deleteDialog!: SubjectDialogDelete;

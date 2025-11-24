@@ -12,7 +12,6 @@
     ></button>
   </div>
 
-  <!-- TABLA -->
   <p-table
     [value]="subjectsSignal()"
     responsiveLayout="scroll"
@@ -22,7 +21,7 @@
       <tr>
         <th>Nombre</th>
         <th>Profesor</th>
-        <!-- descripción removed -->
+
         <th class="text-center">Acciones</th>
       </tr>
     </ng-template>
@@ -35,11 +34,8 @@
           <p-tag severity="info" [value]="subject.profesorName"></p-tag>
         </td>
 
-        <!-- descripción removed -->
-
         <td class="text-center">
           <div class="flex items-center justify-center gap-2">
-            <!-- EDITAR -->
             <button
               pButton
               icon="pi pi-pencil"
@@ -47,7 +43,6 @@
               (click)="openEditDialog(subject)"
             ></button>
 
-            <!-- ELIMINAR -->
             <button
               pButton
               icon="pi pi-trash"
@@ -61,7 +56,6 @@
   </p-table>
 </div>
 
-<!-- DIALOGS -->
 <app-subject-dialog-add />
 <app-subject-dialog-edit />
 <app-subject-dialog-delete />

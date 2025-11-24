@@ -4,7 +4,7 @@ import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { SelectModule } from 'primeng/select';
-import /*LoginService removed - use effects via store*/ '../../services/auth/login';
+
 import { User } from '../../interfaces/user';
 import { ROLES } from '../../constants/roles';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -16,7 +16,6 @@ import { AsyncPipe } from '@angular/common';
 import { take } from 'rxjs';
 import { selectAuthUser } from '../../state/auth/auth.selectors';
 import { Router } from '@angular/router';
-import { AuthActions } from '../../state/auth/auth.actions';
 
 @Component({
   selector: 'app-users-admin-page',
@@ -32,7 +31,6 @@ import { AuthActions } from '../../state/auth/auth.actions';
   templateUrl: './users-admin-page.html',
 })
 export class UsersAdminPage implements OnInit {
-  // no direct service injection; effects handle backend calls
   private fb = inject(FormBuilder);
   private messageService = inject(MessageService);
   private store = inject(Store);
@@ -109,7 +107,7 @@ export class UsersAdminPage implements OnInit {
   }
   actualizarUsuario() {
     if (this.FormEdit.invalid) return;
-    // Asegura que el objeto tenga el `id` del usuario seleccionado
+
     const updatedUser = {
       ...this.FormEdit.value,
       id: this.selectedUser.id,

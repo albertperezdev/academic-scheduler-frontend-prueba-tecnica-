@@ -28,17 +28,17 @@ export const selectSubjectsTotal = createSelector(
 
 export const selectSubjectsLoaded = createSelector(
   selectSubjectsState,
-  (s) => s.loaded
+  (subjects) => subjects.loaded
 );
 
 export const selectSubjectsLoading = createSelector(
   selectSubjectsState,
-  (s) => s.loading
+  (subjects) => subjects.loading
 );
 
 export const selectSubjectsError = createSelector(
   selectSubjectsState,
-  (s) => s.error
+  (subjects) => subjects.error
 );
 
 export const selectSubjectById = (id: number) =>
@@ -53,11 +53,11 @@ export const selectSubjectsWithProfessorName = createSelector(
   selectAllSubjects,
   selectAllUsers,
   (subjects, users) => {
-    return subjects.map((sub) => {
-      const profesor = users.find((u) => u.id === sub.profesorId);
+    return subjects.map((subject) => {
+      const profesor = users.find((user) => user.id === subject.profesorId);
 
       return {
-        ...sub,
+        ...subject,
         profesorName: profesor?.name ?? 'Sin asignar',
       };
     });
@@ -67,5 +67,7 @@ export const selectSubjectsWithProfessorName = createSelector(
 export const selectClassCountForSubject = (userId: number, subjectId: number) =>
   createSelector(selectScheduleByUserId(userId), (schedule) => {
     if (!schedule) return 0;
-    return schedule.blocks.filter((b) => b.subjectId === subjectId).length;
+    return schedule.blocks.filter(
+      (scheduleBlock) => scheduleBlock.subjectId === subjectId
+    ).length;
   });

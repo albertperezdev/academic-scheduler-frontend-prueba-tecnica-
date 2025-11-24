@@ -31,7 +31,7 @@ export class ScheduleDialogEdit {
   days = this.subjectsService.days;
   materias = this.store.selectSignal(selectAllSubjects);
 
-  currentIndex: number | null = null;
+  actualIndex: number | null = null;
 
   scheduleSignal = this.store.selectSignal(
     selectScheduleByUserId(this.store.selectSignal(selectAuthUser)()!.id)
@@ -40,9 +40,9 @@ export class ScheduleDialogEdit {
   get blockOptions() {
     const sched = this.scheduleSignal();
     if (!sched) return [];
-    return sched.blocks.map((b, i) => ({
+    return sched.blocks.map((badge, i) => ({
       index: i,
-      label: `${b.day} — ${b.startTime} a ${b.endTime}`,
+      label: `${badge.day} — ${badge.startTime} a ${badge.endTime}`,
     }));
   }
 
@@ -55,12 +55,12 @@ export class ScheduleDialogEdit {
 
   openEditDialog() {
     this.editVisible = true;
-    this.currentIndex = null;
+    this.actualIndex = null;
     this.formEdit.reset();
   }
 
   onSelectBlock(index: number) {
-    this.currentIndex = index;
+    this.actualIndex = index;
 
     const block = this.scheduleSignal()!.blocks[index];
 
@@ -73,25 +73,25 @@ export class ScheduleDialogEdit {
   }
 
   confirmEditClass() {
-    if (this.formEdit.invalid || this.currentIndex === null) return;
+    if (this.formEdit.invalid || this.actualIndex === null) return;
 
     const raw = this.formEdit.value;
-    const original = this.scheduleSignal()!.blocks[this.currentIndex];
+    const original = this.scheduleSignal()!.blocks[this.actualIndex];
 
     const updatedBlock: ScheduleBlock = {
-      id: original.id, // <-- ID REAL DE LA BD
+      id: original.id,
       day: raw.day!,
       subjectId: raw.subjectId!,
       name:
-        this.materias().find((m: Subject) => m.id === raw.subjectId)?.name ??
-        '',
+        this.materias().find((materia: Subject) => materia.id === raw.subjectId)
+          ?.name ?? '',
       startTime: raw.startTime!,
       endTime: raw.endTime!,
     };
 
     this.store.dispatch(
       ScheduleActions.editClass({
-        index: this.currentIndex,
+        index: this.actualIndex,
         block: updatedBlock,
       })
     );

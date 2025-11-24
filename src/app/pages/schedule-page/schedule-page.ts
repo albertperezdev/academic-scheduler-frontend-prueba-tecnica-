@@ -48,7 +48,6 @@ export class SchedulePage implements OnInit {
 
   dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
 
-  /** Schedule crudo */
   scheduleRaw = computed(() => {
     const user = this.userSignal();
     return user
@@ -56,7 +55,6 @@ export class SchedulePage implements OnInit {
       : null;
   });
 
-  /** Schedule unido con asignaturas (para UI) */
   scheduleForUser = computed(() => {
     const user = this.userSignal();
     if (!user) return null;
@@ -72,7 +70,6 @@ export class SchedulePage implements OnInit {
     }
   }
 
-  /** Agrupa los bloques por día */
   getEventosPorDia(horario: any[], dia: string) {
     return horario.filter((h) => h.dia === dia);
   }
@@ -112,6 +109,3 @@ export class SchedulePage implements OnInit {
 }
 
 export default SchedulePage;
-function selectScheduleAddError(state: any): unknown {
-  throw new Error('Function not implemented.');
-}
