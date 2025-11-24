@@ -1,0 +1,50 @@
+{{ user()?.name }}
+<p-avatar
+  icon="pi pi-user"
+  shape="circle"
+  size="normal"
+  (click)="showDialog()"
+/>
+<p-dialog
+  header="Edit Profile"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '25rem' }"
+>
+  <span class="p-text-secondary block mb-8">Update your information.</span>
+  <form [formGroup]="formEdit" (submit)="onSubmit()">
+    <div class="flex items-center gap-4 mb-4">
+      <label for="username" class="font-semibold w-24">Username</label>
+      <input
+        formControlName="name"
+        pInputText
+        id="username"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+      <label for="email" class="font-semibold w-24">Email</label>
+      <input
+        formControlName="email"
+        pInputText
+        id="email"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+  </form>
+  <div class="flex justify-end gap-2">
+    <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+    <p-button label="Save" (click)="visible = false" />
+    <p-button
+      icon="pi pi-sign-out"
+      severity="danger"
+      rounded
+      outlined
+      pTooltip="Logout"
+      tooltipPosition="left"
+      (click)="logout()"
+    />
+  </div>
+</p-dialog>

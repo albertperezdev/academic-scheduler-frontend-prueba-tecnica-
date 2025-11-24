@@ -1,0 +1,65 @@
+<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '26rem' }">
+  <ng-template #header>
+    <div class="inline-flex items-center gap-2">
+      <i class="pi pi-book text-emerald-400 text-xl"></i>
+      <span class="font-bold text-white">Agregar Asignatura</span>
+    </div>
+  </ng-template>
+
+  <span class="text-white/50 block mb-6">
+    Complete la información para agregar una nueva asignatura.
+  </span>
+
+  <form
+    [formGroup]="addForm"
+    (ngSubmit)="confirmAdd()"
+    class="flex flex-col gap-4"
+  >
+    <!-- Nombre -->
+    <div class="flex gap-3 items-center">
+      <label class="w-28 text-white font-medium">Nombre</label>
+      <input
+        pInputText
+        formControlName="name"
+        placeholder="Ej: Matemáticas"
+        class="flex-auto"
+      />
+    </div>
+
+    <!-- Profesor -->
+    <div class="flex gap-3 items-center">
+      <label class="w-28 text-white font-medium">Profesor</label>
+      <p-select
+        formControlName="profesorId"
+        class="flex-auto"
+        [options]="profesors()"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Seleccione un profesor"
+      >
+      </p-select>
+    </div>
+
+    <!-- Descripción -->
+    <!-- descripción removed -->
+
+    <!-- Máximo clases por semana -->
+    <div class="flex gap-3 items-center">
+      <label class="w-28 text-white font-medium">Clases/Sem</label>
+      <input
+        pInputText
+        type="number"
+        formControlName="maxPerWeek"
+        min="1"
+        class="flex-auto"
+        placeholder="Ej: 3"
+      />
+    </div>
+
+    <!-- FOOTER -->
+    <div class="flex justify-end gap-2 pt-4">
+      <p-button label="Cancelar" (click)="visible = false" [text]="true" />
+      <p-button type="submit" label="Guardar" [outlined]="true" />
+    </div>
+  </form>
+</p-dialog>

@@ -1,0 +1,20 @@
+<div
+  class="min-h-screen flex justify-center items-center bg-[#0d0d0d] relative"
+>
+  <!-- TOAST (ahora sí dentro del layout y por encima de todo) -->
+
+  <!-- efectos bonitos -->
+  <div
+    class="absolute inset-0 pointer-events-none bg-gradient-radial ..."
+  ></div>
+  <div class="absolute top-10 left-20 ..."></div>
+  <div class="absolute bottom-16 right-20 ..."></div>
+
+  <!-- CARD -->
+  <div
+    class="w-full max-w-lg bg-black/40 border border-white/5 backdrop-blur-2xl rounded-2xl shadow-xl p-10 z-10 animate-fade-in"
+  >
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<p-toast />

@@ -1,0 +1,26 @@
+<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '22rem' }">
+  <ng-template #header>
+    <div class="inline-flex items-center gap-2">
+      <i class="pi pi-trash text-red-400 text-xl"></i>
+      <span class="font-bold text-white">Eliminar Asignatura</span>
+    </div>
+  </ng-template>
+
+  <p class="text-white/70 my-4">
+    ¿Eliminar la asignatura
+    <span class="font-semibold text-white">
+      "{{ subjectToDelete?.name }}"
+    </span>
+    ?
+  </p>
+
+  <div class="flex justify-end gap-2 pt-4">
+    <p-button label="Cancelar" [text]="true" (click)="visible = false" />
+    <p-button
+      label="Eliminar"
+      severity="danger"
+      [outlined]="true"
+      (click)="confirmDelete()"
+    />
+  </div>
+</p-dialog>

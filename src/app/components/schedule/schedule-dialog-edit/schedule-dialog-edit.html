@@ -1,0 +1,78 @@
+<p-dialog [(visible)]="editVisible" [modal]="true" [style]="{ width: '28rem' }">
+  <ng-template #header>
+    <div class="inline-flex items-center justify-center gap-2">
+      <i class="pi pi-pencil text-emerald-400 text-xl"></i>
+      <span class="font-bold text-white whitespace-nowrap">Editar Clase</span>
+    </div>
+  </ng-template>
+
+  <!-- TEXTO -->
+  <span class="text-white/50 block mb-4">
+    Seleccione la clase que desea editar.
+  </span>
+
+  <!-- SELECT PARA ELEGIR LA CLASE -->
+  <div class="mb-5">
+    <label class="font-semibold text-white mb-2 block">Clase</label>
+
+    <p-select
+      [options]="blockOptions"
+      optionLabel="label"
+      optionValue="index"
+      placeholder="Selecciona una clase"
+      (onChange)="onSelectBlock($event.value)"
+      class="w-full"
+    />
+  </div>
+
+  <!-- FORMULARIO (solo si hay un bloque seleccionado) -->
+  @if (currentIndex !== null) {
+  <form [formGroup]="formEdit" class="flex flex-col gap-4">
+    <!-- Día -->
+    <div class="flex gap-4 items-center">
+      <label class="font-semibold w-24 text-white">Día</label>
+      <p-select formControlName="day" [options]="days" class="flex-auto" />
+    </div>
+
+    <!-- Materia -->
+    <div class="flex gap-4 items-center">
+      <label class="font-semibold w-24 text-white">Materia</label>
+      <p-select
+        formControlName="subjectId"
+        [options]="materias()"
+        optionLabel="name"
+        optionValue="id"
+        class="flex-auto"
+      />
+    </div>
+
+    <!-- Inicio -->
+    <div class="flex gap-4 items-center">
+      <label class="font-semibold w-24 text-white">Inicio</label>
+      <input
+        pInputText
+        type="time"
+        formControlName="startTime"
+        class="flex-auto"
+      />
+    </div>
+
+    <!-- Fin -->
+    <div class="flex gap-4 items-center">
+      <label class="font-semibold w-24 text-white">Fin</label>
+      <input
+        pInputText
+        type="time"
+        formControlName="endTime"
+        class="flex-auto"
+      />
+    </div>
+  </form>
+  }
+
+  <!-- FOOTER -->
+  <div class="flex justify-end gap-2 pt-4">
+    <p-button label="Cancelar" [text]="true" (click)="editVisible = false" />
+    <p-button label="Guardar" [outlined]="true" (click)="confirmEditClass()" />
+  </div>
+</p-dialog>

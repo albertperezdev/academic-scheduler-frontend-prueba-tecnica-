@@ -1,0 +1,55 @@
+<p-dialog
+  [(visible)]="deleteVisible"
+  [modal]="true"
+  [style]="{ width: '26rem' }"
+>
+  <ng-template #header>
+    <div class="inline-flex items-center justify-center gap-2">
+      <i class="pi pi-trash text-red-400 text-xl"></i>
+      <span class="font-bold text-white whitespace-nowrap">Eliminar Clase</span>
+    </div>
+  </ng-template>
+
+  <span class="text-white/50 block mb-4">
+    Selecciona la clase que deseas eliminar.
+  </span>
+
+  <form [formGroup]="deleteForm" (ngSubmit)="confirmDeleteClass()">
+    <div class="mb-5">
+      <label class="font-semibold text-white mb-2 block">Clase</label>
+
+      <p-select
+        formControlName="index"
+        [options]="blockOptions"
+        optionLabel="label"
+        optionValue="index"
+        placeholder="Selecciona una clase"
+        class="w-full"
+      ></p-select>
+    </div>
+
+    @if (deleteForm.value.index !== null) {
+    <div class="bg-red-500/10 border border-red-400/20 rounded-lg p-3 mb-4">
+      <i class="pi pi-exclamation-triangle text-red-300 text-sm mr-2"></i>
+      <span class="text-red-300 text-sm">
+        ¿Seguro que deseas eliminar esta clase? Esta acción no se puede
+        deshacer.
+      </span>
+    </div>
+    }
+
+    <div class="flex justify-end gap-2 pt-4">
+      <p-button
+        label="Cancelar"
+        [text]="true"
+        (click)="deleteVisible = false"
+      />
+      <p-button
+        label="Eliminar"
+        type="submit"
+        severity="danger"
+        [outlined]="true"
+      />
+    </div>
+  </form>
+</p-dialog>

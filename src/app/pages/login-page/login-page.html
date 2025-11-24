@@ -1,0 +1,54 @@
+<div class="animate-fade-page">
+  <h2 class="text-center text-2xl font-semibold text-white mb-6 tracking-wide">
+    Bienvenido de nuevo
+  </h2>
+
+  <form
+    [formGroup]="formLogin"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-5"
+  >
+    <div class="flex flex-col gap-1 mb-4">
+      <div class="relative">
+        <i
+          class="pi pi-envelope text-white/40 absolute left-3 top-1/2 -translate-y-1/2 text-base"
+        ></i>
+        <p-floatlabel variant="on">
+          <input
+            pInputText
+            formControlName="email"
+            class="w-full h-11 pl-10 bg-[#0e0e0e]/80 backdrop-blur-sm border border-white/10 text-white text-sm rounded-lg transition-all duration-300 focus:border-emerald-400 focus:bg-black/50 focus:shadow-[0_0_12px_rgba(16,185,129,0.25)] placeholder:text-white/40"
+          />
+          <label class="text-sm text-white/70">Email</label>
+        </p-floatlabel>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-1 mb-4">
+      <div class="relative">
+        <i
+          class="pi pi-lock text-white/40 absolute left-3 top-1/2 -translate-y-1/2 text-base"
+        ></i>
+
+        <p-floatlabel variant="on">
+          <input
+            pPassword
+            type="password"
+            formControlName="password"
+            class="w-full h-11 pl-10 bg-[#0e0e0e]/80 backdrop-blur-sm border border-white/10 text-white text-sm rounded-lg transition-all duration-300 focus:border-emerald-400 focus:bg-black/50 focus:shadow-[0_0_12px_rgba(16,185,129,0.25)] placeholder:text-white/40"
+          />
+
+          <label class="text-sm text-white/70">Contraseña</label>
+        </p-floatlabel>
+      </div>
+    </div>
+
+    <button
+      pButton
+      label="Ingresar"
+      class="w-full mt-2 bg-emerald-500 border-none text-black font-semibold py-3 rounded-lg transition-all duration-300 hover:bg-emerald-400 hover:shadow-xl hover:shadow-emerald-500/20 active:scale-98 active:shadow-inner"
+    ></button>
+
+    <!-- Register link removed -->
+  </form>
+</div>

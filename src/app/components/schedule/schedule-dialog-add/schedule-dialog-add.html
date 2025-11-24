@@ -1,0 +1,59 @@
+<p-dialog [(visible)]="addVisible" [modal]="true" [style]="{ width: '26rem' }">
+  <ng-template #header>
+    <div class="inline-flex items-center gap-2">
+      <i class="pi pi-calendar-plus text-emerald-400 text-xl"></i>
+      <span class="font-bold text-white">Agregar Clase</span>
+    </div>
+  </ng-template>
+
+  <span class="text-white/50 block mb-6">Complete la información.</span>
+
+  <form [formGroup]="addForm" (ngSubmit)="confirmAddClass()">
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-4">
+        <label class="w-24 text-white">Día</label>
+        <p-select
+          formControlName="day"
+          [options]="days"
+          placeholder="Seleccione"
+          class="flex-auto"
+        ></p-select>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <label class="w-24 text-white">Materia</label>
+        <p-select
+          formControlName="subjectId"
+          [options]="materias()"
+          optionLabel="name"
+          optionValue="id"
+        ></p-select>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <label class="w-24 text-white">Inicio</label>
+        <input
+          pInputText
+          type="time"
+          formControlName="startTime"
+          class="flex-auto"
+        />
+      </div>
+
+      <div class="flex items-center gap-4">
+        <label class="w-24 text-white">Fin</label>
+        <input
+          pInputText
+          type="time"
+          formControlName="endTime"
+          class="flex-auto"
+        />
+      </div>
+    </div>
+  </form>
+
+  <div class="flex justify-end gap-2 pt-4">
+    <p-button label="Cancelar" [text]="true" (click)="addVisible = false" />
+    <p-button label="Guardar" (click)="confirmAddClass()" />
+  </div>
+</p-dialog>

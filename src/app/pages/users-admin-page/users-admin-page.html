@@ -1,0 +1,233 @@
+<div class="p-8">
+  <!-- Encabezado -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-semibold text-gray-200">Gestión de Usuarios</h2>
+
+    <button
+      pButton
+      icon="pi pi-plus"
+      label="Crear Usuario"
+      class="p-button-success"
+      (click)="visibleCreate = true"
+    ></button>
+  </div>
+
+  <!-- Tabla -->
+  <p-table
+    [value]="(usuarios$ | async)!"
+    responsiveLayout="scroll"
+    class="shadow-lg rounded-4xl overflow-hidden"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th class="text-center">Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+
+        <td>
+          <p-tag severity="info" [value]="user.role"></p-tag>
+        </td>
+
+        <td>
+          <p-tag
+            [severity]="user.active ? 'success' : 'danger'"
+            [value]="user.active ? 'Activo' : 'Inactivo'"
+          >
+          </p-tag>
+        </td>
+
+        <!-- ACCIONES -->
+        <td class="text-center">
+          <div class="flex items-center justify-center gap-2">
+            <!-- Editar -->
+            <button
+              pButton
+              severity="info"
+              icon="pi pi-pencil"
+              class="p-button-warning p-button-rounded p-button-sm"
+              (click)="editarUsuario(user)"
+            ></button>
+
+            <!-- Eliminar -->
+            <button
+              pButton
+              severity="danger"
+              icon="pi pi-trash"
+              class="p-button-danger p-button-rounded p-button-sm"
+              (click)="deleteUser(user)"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<div class="card">
+  <form [formGroup]="FormAdd" (ngSubmit)="crearUsuario()">
+    <p-dialog
+      header="Crear Usuario"
+      [(visible)]="visibleCreate"
+      [modal]="true"
+      [draggable]="false"
+      [style]="{ width: '32rem' }"
+      contentStyleClass="!p-0 !overflow-hidden"
+      headerStyleClass="!bg-transparent !text-gray-100 !text-xl !font-semibold"
+    >
+      <!-- CONTENIDO COMPLETO -->
+      <div
+        class="bg-[#0d0d0d]/80 backdrop-blur-xl border border-white/10 pl-8 pt-4 pr-8 rounded-2xl"
+      >
+        <!-- SUBTITULO -->
+        <p class="text-gray-400 text-sm mb-4">Añade un usuario</p>
+
+        <div class="flex flex-col gap-5">
+          <!-- Nombre -->
+          <div class="flex flex-col gap-2">
+            <label class="text-gray-300 text-sm font-black">Nombre</label>
+            <input
+              pInputText
+              formControlName="name"
+              class="w-full h-11 rounded-xl px-3 text-gray-200 bg-white/5 border border-white/10 focus:border-emerald-400 focus:bg-black/30 transition-all duration-200"
+              placeholder="Nombre completo"
+            />
+          </div>
+
+          <!-- Email -->
+          <div class="flex flex-col gap-2">
+            <label class="text-gray-300 text-sm font-black">Email</label>
+            <input
+              formControlName="email"
+              pInputText
+              class="w-full h-11 rounded-xl px-3 text-gray-200 bg-white/5 border border-white/10 focus:border-emerald-400 focus:bg-black/30 transition-all duration-200"
+              placeholder="correo@ejemplo.com"
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="text-gray-300 text-sm font-black">Contraseña</label>
+            <input
+              formControlName="password"
+              pInputText
+              class="w-full h-11 rounded-xl px-3 text-gray-200 bg-white/5 border border-white/10 focus:border-emerald-400 focus:bg-black/30 transition-all duration-200"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label class="text-gray-300 text-sm font-black">Rol</label>
+            <p-select
+              formControlName="role"
+              [options]="roles"
+              optionValue="value"
+              optionLabel="label"
+              placeholder="Selecciona el rol"
+              class="w-full md:w-56"
+            />
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="flex justify-end gap-3 mt-8 mb-4">
+          <button
+            pButton
+            label="Cancelar"
+            class="bg-white/10! border-none! text-gray-300! hover:bg-white/20! rounded-xl px-5 py-2 font-medium"
+            (click)="visibleCreate = false"
+          ></button>
+
+          <button
+            pButton
+            label="Guardar"
+            type="submit"
+            class="bg-emerald-600! border-none! hover:bg-emerald-700! text-white font-medium rounded-xl px-5 py-2"
+          ></button>
+        </div>
+      </div>
+    </p-dialog>
+  </form>
+  <form [formGroup]="FormEdit" (ngSubmit)="actualizarUsuario()">
+    <p-dialog
+      header="Editando usuario"
+      [(visible)]="visibleEdit"
+      [modal]="true"
+      [draggable]="false"
+      [style]="{ width: '32rem' }"
+      contentStyleClass="!p-0 !overflow-hidden"
+      headerStyleClass="!bg-transparent !text-gray-100 !text-xl !font-semibold"
+    >
+      <!-- CONTENIDO COMPLETO -->
+      <div
+        class="bg-[#0d0d0d]/80 backdrop-blur-xl border border-white/10 pl-8 pt-4 pr-8 rounded-2xl"
+      >
+        <div class="flex flex-col gap-5">
+          <!-- Nombre -->
+          <div class="flex flex-col gap-2">
+            <label class="text-gray-300 text-sm font-black">Nombre</label>
+            <input
+              pInputText
+              [value]=""
+              formControlName="name"
+              class="w-full h-11 rounded-xl px-3 text-gray-200 bg-white/5 border border-white/10 focus:border-emerald-400 focus:bg-black/30 transition-all duration-200"
+              placeholder="Nombre completo"
+            />
+          </div>
+
+          <!-- Email -->
+          <div class="flex flex-col gap-2">
+            <label class="text-gray-300 text-sm font-black">Email</label>
+            <input
+              formControlName="email"
+              pInputText
+              class="w-full h-11 rounded-xl px-3 text-gray-200 bg-white/5 border border-white/10 focus:border-emerald-400 focus:bg-black/30 transition-all duration-200"
+              placeholder="correo@ejemplo.com"
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="text-gray-300 text-sm font-black">Contraseña</label>
+            <input
+              formControlName="password"
+              pInputText
+              class="w-full h-11 rounded-xl px-3 text-gray-200 bg-white/5 border border-white/10 focus:border-emerald-400 focus:bg-black/30 transition-all duration-200"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label class="text-gray-300 text-sm font-black">Rol</label>
+            <p-select
+              formControlName="role"
+              [options]="roles"
+              optionValue="value"
+              optionLabel="label"
+              placeholder="Selecciona el rol"
+              class="w-full md:w-56"
+            />
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="flex justify-end gap-3 mt-8 mb-4">
+          <button
+            pButton
+            label="Cancelar"
+            class="bg-white/10! border-none! text-gray-300! hover:bg-white/20! rounded-xl px-5 py-2 font-medium"
+            (click)="visibleEdit = false"
+          ></button>
+
+          <button
+            pButton
+            label="Guardar"
+            type="submit"
+            class="bg-emerald-600! border-none! hover:bg-emerald-700! text-white font-medium rounded-xl px-5 py-2"
+          ></button>
+        </div>
+      </div>
+    </p-dialog>
+  </form>
+</div>
